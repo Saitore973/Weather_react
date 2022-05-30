@@ -6,9 +6,9 @@ export default function Weather(){
             <div className="row">
           <div className="col-md-2">
           <img className="img-responsive" src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="current "/>
-          <span>17 </span> °C
+          <span className="celcious">17°<span className="fahrenheit">c</span></span> 
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 prec">
                <ul>
                    <li>
                        Precipitation: 2%
@@ -31,7 +31,7 @@ export default function Weather(){
             <h1>
                 New york, NY, USA
             </h1>
-            <ul>
+            <ul className="day">
                 <li>
                     Sunday 04:00 PM
                 </li>

@@ -1,8 +1,24 @@
-span{
+.celcious{
     font-size: 47px;
    
 }
 img{
-    
     padding-bottom: 20px;
+}
+.fahrenheit{
+    font-size: 22px;
+    padding: 20px;
+}
+ul{
+    list-style: none;
+    
+}
+.prec{
+    text-align: start;
+}
+
+.day{
+    margin-right: 15px;
+    text-align: right;
+
 }
