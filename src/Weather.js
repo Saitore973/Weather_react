@@ -6,7 +6,7 @@ export default function Weather(){
             <form>
                 <input type="text" />
                 <input type="submit" value="Search" />
-            </form>
+            </form> <br /> <br />
             <div className="row">
           <div className="col-md-2">
           <img className="img-responsive" src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="current "/>
