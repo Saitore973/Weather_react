@@ -1,16 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from 'axios';
 import "./Weather.css"
 
 export default function Weather(){
-
-    function handleResponse(){
-        console.log("response.data")
+    let [temperature,setTemperature]=useState(null);
+    let [ready,setReady]=useState(false);
+    function handleResponse(response) {
+        console.log(response.data)
+        setTemperature(response.data.main.temp)
+        setReady(true)
     }
 
-    let apiKey = "fac714ae175c709753ea0304d9c0a29e";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}`
-    axios.get(apiUrl).then(handleResponse);
+    
+
+    if (ready){
+
     return (
         <div>
             <form>
@@ -20,7 +24,7 @@ export default function Weather(){
             <div className="row">
           <div className="col-md-2">
           <img className="img-responsive" src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="current "/>
-          <span className="celcious">17°<span className="fahrenheit">c</span></span> 
+          <span className="celcious">{temperature}°<span className="fahrenheit">c</span></span> 
           </div>
           <div className="col-md-2 prec">
                <ul>
@@ -112,4 +116,15 @@ export default function Weather(){
             
         </div>
     )
+
+    }else{
+        let apiKey = "fac714ae175c709753ea0304d9c0a29e";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}`
+        axios.get(apiUrl).then(handleResponse);
+
+        return (
+            "Loading weather"
+        )
+    }
+
 }
