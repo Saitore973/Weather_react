@@ -1,19 +1,25 @@
 import React, {useState} from "react";
 import axios from 'axios';
 import "./Weather.css"
+import Currentdate from "./Currentdate"
 
 export default function Weather(){
-    let [temperature,setTemperature]=useState(null);
-    let [ready,setReady]=useState(false);
+    let [weatherData,setWeatherData] =useState({ready:false});
+    
     function handleResponse(response) {
         console.log(response.data)
-        setTemperature(response.data.main.temp)
-        setReady(true)
+        setWeatherData({
+            ready:true,
+            temperature:response.data.main.temp,
+            wind:response.data.wind.speed,
+            humidity:response.data.main.humidity,
+            date:new Date(response.data.dt * 1000)
+        })
+        
     }
 
     
-
-    if (ready){
+    if (weatherData.ready){
 
     return (
         <div>
@@ -24,7 +30,7 @@ export default function Weather(){
             <div className="row">
           <div className="col-md-2">
           <img className="img-responsive" src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="current "/>
-          <span className="celcious">{temperature}°<span className="fahrenheit">c</span></span> 
+          <span className="celcious">{Math.round(weatherData.temperature)}°<span className="fahrenheit">c</span></span> 
           </div>
           <div className="col-md-2 prec">
                <ul>
@@ -32,10 +38,10 @@ export default function Weather(){
                        Precipitation: 2%
                    </li>
                    <li>
-                       Humididty: 73%
+                       Humididty: {Math.round(weatherData.humidity)}
                    </li>
                    <li>
-                       Wind: 6 Km/hr
+                       Wind: {Math.round(weatherData.wind)}
                    </li>
                </ul>
                    
@@ -51,7 +57,7 @@ export default function Weather(){
             </h1>
             <ul className="day">
                 <li>
-                    Sunday 04:00 PM
+                    <Currentdate date={weatherData.date}/>
                 </li>
                 <li>
                     Clear
@@ -118,8 +124,8 @@ export default function Weather(){
     )
 
     }else{
-        let apiKey = "fac714ae175c709753ea0304d9c0a29e";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}`
+        let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&units=metric&appid=${apiKey}`
         axios.get(apiUrl).then(handleResponse);
 
         return (

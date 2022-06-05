@@ -8,6 +8,11 @@ img{
 }
 .fahrenheit{
     font-size: 22px;
+    font-weight: 400;
+    position: relative;
+    line-height: 1;
+    top: -34px;
+    margin-left: -15px;
     padding: 20px;
 }
 ul{
